@@ -162,7 +162,6 @@ body.invert #nav a:hover {
             document.body.classList[pref ? "add" : "remove"]("invert");
         }
 
-        // New code for file upload
         document.getElementById('paste-upload').addEventListener('change', function (event) {
             var file = event.target.files[0];
             if (!file) {
@@ -173,9 +172,9 @@ body.invert #nav a:hover {
             var reader = new FileReader();
             reader.onload = function (e) {
                 var content = e.target.result;
-                document.getElementById("plaintext").value = content; // Populate the text area with file content
+                document.getElementById("plaintext").value = content;
             };
-            reader.readAsText(file); // Read the file as text
+            reader.readAsText(file);
         });
 
       function shortenUrl() {
