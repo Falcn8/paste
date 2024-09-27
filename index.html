@@ -180,31 +180,43 @@ body.invert #nav a:hover {
 
       function shortenUrl() {
           const url = document.getElementById('text-offer-value').value; // Get the generated URL from the text offer
-          const shortenBtn = document.createElement('a');
-          const loading = document.createElement('span');
-          const resultContainer = document.getElementById('text-offer-value');
-          const statusMessage = document.createElement('span');
+          const resultContainer = document.getElementById('text-offer-value'); // The field to update with the short URL
+          const statusMessage = document.createElement('span'); // To display status messages
       
           if (!url) {
               alert("No URL to shorten.");
               return;
           }
       
-          // Disable the shorten button and show loading indicator
-          shortenBtn.innerText = 'Shortening...';
-          loading.classList.remove('hidden');
+          statusMessage.innerText = 'Shortening...';
+          document.getElementById("nav").appendChild(statusMessage);
       
-          // Simulate a URL shortening service request
-          // You would replace this with your actual URL shortening service request (e.g., an API call)
-          setTimeout(() => {
-              const shortenedUrl = "https://short.ly/" + Math.random().toString(36).substr(2, 8); // Fake shortened URL
-      
-              // Hide loading indicator and update the shortened URL
-              loading.classList.add('hidden');
-              shortenBtn.innerText = 'Shorten URL';
-              resultContainer.value = shortenedUrl; // Update the text field with the shortened URL
-              statusMessage.innerText = 'Short URL generated!';
-          }, 2000); // Simulating API delay
+          fetch('https://linkx.hexagon.one/api/shorten', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  destination: url
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.short_link) {
+                  resultContainer.value = data.short_link;
+                  statusMessage.innerText = 'Short URL generated!';
+              } else {
+                  statusMessage.innerText = `Error: ${data.error || 'Unknown error'}`;
+              }
+          })
+          .catch(error => {
+              statusMessage.innerText = `Error: ${error.message}`;
+          })
+          .finally(() => {
+              setTimeout(() => {
+                  statusMessage.innerText = '';
+              }, 2000);
+          });
       }
     </script>
 </head>
