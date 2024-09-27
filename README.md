@@ -1,6 +1,5 @@
-Try it here: https://paste.hexagon.one
+# Give it a try here: https://paste.hexagon.one
 
-This is a no-datastore, client-side paste service.  It turns text into [LZMA](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm)-compressed, [Base64](https://en.wikipedia.org/wiki/Base64)-encoded URLs.
+This is a client-side paste service that doesn't use a datastore. It converts your text into LZMA-compressed, Base64-encoded URLs.
 
-Because the entire paste is inside the URL, there's no risk of losing your data because a 3rd-party service vanished or deleted old pastes.  If you have the URL, you have the pasted data.
-
+Since the entire paste is contained within the URL, there's no worry about losing your data due to a third-party service disappearing or removing old pastes. As long as you have the URL, you have access to your data.
