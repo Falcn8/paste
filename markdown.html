@@ -33,8 +33,9 @@
     var lzma = new LZMA("lzma_worker.js");
 
     document.addEventListener('DOMContentLoaded', function () {
-        // Get everything after markdown# in the URL
-        var base64 = location.hash.substr(14); // to skip 'markdown.html#'
+        // Get everything after the # in the URL
+        var base64 = location.hash.substring(1); // Get all data after #
+
         if (base64.length == 0) return;
 
         fetch("data:application/octet-stream;base64," + base64).then(r => r.blob()).then(function (blob) {
