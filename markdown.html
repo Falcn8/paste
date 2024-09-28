@@ -49,7 +49,7 @@
                     }
                     
                     // Parse and render the markdown content
-                    var htmlContent = marked(plaintext);
+                    var htmlContent = marked.parse(plaintext);
                     document.getElementById("markdown-content").innerHTML = htmlContent;
                 });
             };
