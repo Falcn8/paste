@@ -122,14 +122,20 @@ body.invert #nav a:hover {
                     alert("Failed to compress data: " + error);
                     return;
                 }
-
+    
                 var reader = new FileReader();
                 reader.onload = function () {
                     var base64 = reader.result.substr(reader.result.indexOf(",") + 1);
-                    var url = "https://" + location.host + location.pathname + "#" + base64;
+                    var url;
+                    if (format === 'markdown') {
+                        url = "https://" + location.host + "/markdown.html#" + base64;
+                    } else {
+                        url = "https://" + location.host + location.pathname + "#" + base64;
+                    }
+    
                     var result;
                     if (format === 'markdown') {
-                        result = "[paste](" + url + ")";
+                        result = "[markdown paste](" + url + ")";
                     } else {
                         result = url;
                     }
@@ -229,7 +235,7 @@ body.invert #nav a:hover {
             <a class="nav-left" href="https://github.com/falcn8/paste">[github]</a>
             <a class="nav-left" onclick="invert()">[invert colors]</a>
             <a onclick="url_generate('raw')">[generate url]</a>
-            <!-- <a onclick="url_generate('markdown')">[generate markdown link]</a> -->
+            <a onclick="url_generate('markdown')">[generate markdown link]</a>
             <input type="file" id="paste-upload" accept=".txt,.md,.json" style="display: none;" />
             <a onclick="document.getElementById('paste-upload').click()">[upload paste]</a>
         </span>
