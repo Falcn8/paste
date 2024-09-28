@@ -132,14 +132,7 @@ body.invert #nav a:hover {
                     } else {
                         url = "https://" + location.host + location.pathname + "#" + base64;
                     }
-    
-                    var result;
-                    if (format === 'markdown') {
-                        result = "[markdown paste](" + url + ")";
-                    } else {
-                        result = url;
-                    }
-                    text_offer(result);
+                    text_offer(url);
                 };
                 reader.readAsDataURL(new Blob([new Uint8Array(compressed)]));
             });
